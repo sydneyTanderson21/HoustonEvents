@@ -1,0 +1,1 @@
+You can customize and breakdown this components folder however you see fit based on your project needs, but ideally this folder shouldn't get too large as many of your more complex components will be stored in the pages folder.
