@@ -1,2 +1,2 @@
 # HoustonEvents
-Side project similar to Eventbrite. 
+Side project similar to Eventbrite! 
