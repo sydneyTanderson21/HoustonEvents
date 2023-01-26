@@ -1,0 +1,13 @@
+version: "3.8" #look into versioning?
+
+services:
+  houston_events:
+    container_name: houstonevents-docker-frontend
+    image: houstonevents-frontend-image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80 # hosting port : container port 
+    environment:
+      - NODE_ENV=production
