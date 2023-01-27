@@ -1,5 +1,6 @@
 # Stage 1 "build-stage", based on Node.js, to build and compile the frontend
 FROM node:18.13-bullseye-slim as build-stage
+ENV NODE_ENV production
 
 # Create application directory if it doesnt exist
 RUN mkdir -p /app
@@ -21,16 +22,10 @@ COPY ./ /app/
 # Build the app
 RUN npm run build
 
-# ==== RUN =======
-# # Set the env to "production"
-# ENV NODE_ENV production
-# # Expose the port on which the app will be running (3000 is the default that `serve` uses)
-# EXPOSE 3000
-# # Start the app
-# CMD [ "npx", "serve", "build" ]
 
 # Stage 2, create image with NGINX
 FROM nginx:1.23.3
+ENV NODE_ENV production
 
 #Create and set a new working directory
 WORKDIR /usr/share/nginx/html

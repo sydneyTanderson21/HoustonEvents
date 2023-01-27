@@ -1,0 +1,22 @@
+# This is for the Development Build 
+FROM node:18.13-bullseye-slim as development
+
+# this is setting the environment variable Node in the development env.
+ENV NODE_ENV development 
+
+#adding a working directory that we are working in
+WORKDIR /app
+
+# Need to copy package.json and .lock file in order to use npm commands
+COPY package*.json /app/
+RUN npm install
+
+# Copy our project dir (locally) into the working directory
+# ./ /app/
+COPY ./ /app/
+
+# Expose port
+EXPOSE 3000
+
+# Start the app
+CMD [ "npm", "start" ]

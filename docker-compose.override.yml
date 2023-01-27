@@ -1,0 +1,16 @@
+version: "3.8" #look into versioning?
+
+services:
+  frontend:
+    container_name: houstonevents-frontend
+    image: houstonevents-frontend-image
+    restart: always # What to do if container crashes
+    build: # path to dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports: # binds local port to container port 
+      - 3000:3000 # hosting port : container port 
+
+    volumes:
+      - /app/node_modules
+      - .:/app

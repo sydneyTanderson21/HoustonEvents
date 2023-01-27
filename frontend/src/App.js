@@ -24,7 +24,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
     
-        <p>Testing Environment  variable: {process.env.REACT_APP_NOT_SECRET_CODE} </p>
+        <p>Testing Environment variable: {process.env.NODE_ENV} </p>
       
         <a
           className="App-link"
@@ -49,7 +49,7 @@ function App() {
   }
   
   function About() {
-    return <h2>About</h2>;
+    return <h2>About!</h2>;
   }
 }
 
