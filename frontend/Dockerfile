@@ -21,6 +21,14 @@ COPY ./ /app/
 # Build the app
 RUN npm run build
 
+# ==== RUN =======
+# # Set the env to "production"
+# ENV NODE_ENV production
+# # Expose the port on which the app will be running (3000 is the default that `serve` uses)
+# EXPOSE 3000
+# # Start the app
+# CMD [ "npx", "serve", "build" ]
+
 # Stage 2, create image with NGINX
 FROM nginx:1.23.3
 
@@ -33,7 +41,7 @@ RUN rm -rf ./*
 # copy the files generated in build-stage to directory
 COPY --from=build-stage /app/build/ .
 
-# Copy nginx.conf 
+# Copy nginx configurations over
 COPY --from=build-stage /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 #COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
