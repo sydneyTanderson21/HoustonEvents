@@ -1,4 +1,4 @@
-version: "3.8" #look into versioning?
+version: "2" # docker compose version
 
 services:
   frontend:
@@ -10,7 +10,4 @@ services:
       dockerfile: Dockerfile
     ports: # binds local port to container port 
       - 80:80 # hosting port : container port 
-    #environment:
-    #  - NODE_ENV=production
-    #links:
-    #  - backend
+  
