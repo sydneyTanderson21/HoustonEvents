@@ -1,0 +1,13 @@
+version: "2" # docker compose version
+
+services:
+  frontend:
+    container_name: houstonevents-frontend
+    image: houstonevents-frontend-image
+    restart: always # What to do if container crashes
+    build: # path to dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports: # binds local port to container port 
+      - 80:80 # hosting port : container port 
+  

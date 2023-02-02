@@ -1,14 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-// import * as dotenv from 'dotenv';
+import React from "react";
+import {
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 function App() {
-
-  // //testing dotenv
-  // dotenv.config()
-
   return (
+    <>
+    <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+        </ul>
+      </nav>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -16,7 +24,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
     
-      <p>Testing Environment  variable: {process.env.REACT_APP_NOT_SECRET_CODE} </p>
+        <p>Testing Environment variable: {process.env.NODE_ENV} </p>
       
         <a
           className="App-link"
@@ -28,7 +36,21 @@ function App() {
         </a>
       </header>
     </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </>
   );
+
+  function Home() {
+    return <h2>Home</h2>;
+  }
+  
+  function About() {
+    return <h2>About!</h2>;
+  }
 }
 
 export default App;

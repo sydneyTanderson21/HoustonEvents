@@ -1,0 +1,20 @@
+version: "2" # docker compose version
+
+services:
+  frontend:
+    container_name: dev-frontend
+    image: dev-frontend-image
+    restart: always # What to do if container crashes
+    build: # path to dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=false
+      - WDS_SOCKET_PORT=30000
+    ports: # binds local port to container port 
+      - 3000:3000 # hosting port : container port 
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
