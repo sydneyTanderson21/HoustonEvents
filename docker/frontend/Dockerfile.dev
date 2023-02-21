@@ -1,0 +1,32 @@
+# This is for the Development Build 
+FROM node:18.13-bullseye-slim as development
+
+# this is setting the environment variable Node in the development env.
+ENV NODE_ENV development 
+
+#adding a working directory that we are working in
+WORKDIR /app
+
+#Environment variables.
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Need to copy package.json and .lock file in order to use npm commands
+#COPY package*.json /app/
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+#install nodemon to provide hot-reloading functionality.
+RUN npm install nodemon --save-dev
+
+# Copy our project dir (locally) into the working directory
+COPY ./frontend /app/
+
+# Expose port
+EXPOSE 3000
+
+# Start the app
+#CMD [ "npm", "start" ]
+#use nodemon to run the react application using npm.
+CMD ["nodemon", "--exec", "npm", "start"]
