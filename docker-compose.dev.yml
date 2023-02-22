@@ -1,20 +1,31 @@
-version: "2" # docker compose version
+version: '2'
 
 services:
-  frontend:
-    container_name: dev-frontend
-    image: dev-frontend-image
-    restart: always # What to do if container crashes
-    build: # path to dockerfile
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - FAST_REFRESH=false
-      - WDS_SOCKET_PORT=30000
-    ports: # binds local port to container port 
-      - 3000:3000 # hosting port : container port 
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
+    frontend-nginx: 
+        container_name: dev-django-react
+        image: dev-djangoreact-image
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/frontend/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - static_volume:/app/backend/backend/staticfiles
+            - ./docker/nginx/development:/etc/nginx/conf.d
+        depends_on: 
+            - backend
+    backend:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
+            
+        entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+        volumes:
+            - static_volume:/app/backend/backend/staticfiles
+        expose:
+            - 8000        
+
+volumes:
+    static_volume: {}
