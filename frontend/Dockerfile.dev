@@ -12,8 +12,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # Need to copy package.json and .lock file in order to use npm commands
 #COPY package*.json /app/
-COPY package.json ./
-COPY package-lock.json ./
+COPY ./package.json ./
+COPY ./package-lock.json ./
 
 RUN npm install
 
@@ -21,7 +21,7 @@ RUN npm install
 RUN npm install nodemon --save-dev
 
 # Copy our project dir (locally) into the working directory
-COPY ./frontend /app/
+COPY ./ /app/
 
 # Expose port
 EXPOSE 3000

@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "build": "cd ../frontend && npm install && npm run build",
+    "dev": "nodemon -L -e js --exec \"npm run build && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mongodb": "^5.0.1"
+    "pg": "^8.9.0",
+    "sequelize": "^6.29.0"
   },
   "keywords": [],
   "author": "",
